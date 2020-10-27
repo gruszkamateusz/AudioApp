@@ -2,6 +2,8 @@
 using System;
 using System.Windows.Forms;
 
+
+
 namespace AudioApp
 {
     public partial class AudioApp : Form
@@ -12,6 +14,7 @@ namespace AudioApp
         }
         private NAudio.Wave.WaveFileReader wave = null;
         private NAudio.Wave.DirectSoundOut output = null;
+        private WMPLib.WindowsMediaPlayer Player;
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -33,12 +36,12 @@ namespace AudioApp
         {
             if(output != null)
             {
-                if (output.PlaybackState == NAudio.Wave.PlaybackState.Playing) output.Stop();
+                if (output.PlaybackState == NAudio.Wave.PlaybackState.Playing) output.Pause();
                 else if (output.PlaybackState == NAudio.Wave.PlaybackState.Paused) output.Play();
-                output.Dispose();
-                output = null;
+                
             }
         }
+
         private void DisposeWave()
         {
             if (output != null)
@@ -57,6 +60,39 @@ namespace AudioApp
         private void AudioApp_FormClosing(object sender, FormClosingEventArgs e)
         {
             DisposeWave();
+        }
+
+        private void PlayFile(String url)
+        {
+            Player = new WMPLib.WindowsMediaPlayer();
+            Player.PlayStateChange +=
+                new WMPLib._WMPOCXEvents_PlayStateChangeEventHandler(Player_PlayStateChange);
+            Player.MediaError +=
+                new WMPLib._WMPOCXEvents_MediaErrorEventHandler(Player_MediaError);
+            Player.URL = url;
+            Player.controls.play();
+        }
+
+        private void Player_PlayStateChange(int NewState)
+        {
+            if ((WMPLib.WMPPlayState)NewState == WMPLib.WMPPlayState.wmppsStopped)
+            {
+                this.Close();
+            }
+        }
+
+        private void Player_MediaError(object pMediaObject)
+        {
+            MessageBox.Show("Cannot play media file.");
+            this.Close();
+        }
+
+        private void buttonWMP_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            open.Filter = " MP3 File (*.mp3)|*.mp3;";
+            if (open.ShowDialog() != DialogResult.OK) return;
+            PlayFile(open.FileName); //odtwarza plik .mp3 z podanego adresu URL
         }
     }
 }
