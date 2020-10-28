@@ -26,3 +26,8 @@ C:\Users\Artur\Desktop\Studia\5 semestr\UP\AudioApp\AudioApp\obj\Debug\AudioApp.
 C:\Users\Artur\Desktop\Studia\5 semestr\UP\AudioApp\AudioApp\obj\Debug\AxInterop.WMPLib.dll
 C:\Users\Artur\Desktop\Studia\5 semestr\UP\AudioApp\AudioApp\bin\Debug\Interop.WMPLib.dll
 C:\Users\Artur\Desktop\Studia\5 semestr\UP\AudioApp\AudioApp\bin\Debug\AxInterop.WMPLib.dll
+C:\Users\huawei\source\repos\AudioApp\AudioApp\bin\Debug\Interop.WMPLib.dll
+C:\Users\huawei\source\repos\AudioApp\AudioApp\bin\Debug\AxInterop.WMPLib.dll
+C:\Users\huawei\source\repos\AudioApp\AudioApp\obj\Debug\Interop.WMPLib.dll
+C:\Users\huawei\source\repos\AudioApp\AudioApp\obj\Debug\AxInterop.WMPLib.dll
+C:\Users\huawei\source\repos\AudioApp\AudioApp\obj\Debug\AudioApp.csproj.ResolveComReference.cache
