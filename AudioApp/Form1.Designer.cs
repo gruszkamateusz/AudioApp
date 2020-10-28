@@ -38,6 +38,7 @@
             this.waveBtn = new System.Windows.Forms.Button();
             this.stopBtn = new System.Windows.Forms.Button();
             this.refBtn = new System.Windows.Forms.Button();
+            this.buttonReadWavHeader = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -47,7 +48,7 @@
             // openBtn
             // 
             this.openBtn.Location = new System.Drawing.Point(27, 10);
-            this.openBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.openBtn.Margin = new System.Windows.Forms.Padding(2);
             this.openBtn.Name = "openBtn";
             this.openBtn.Size = new System.Drawing.Size(118, 36);
             this.openBtn.TabIndex = 0;
@@ -59,7 +60,7 @@
             // 
             this.pauseBtn.Enabled = false;
             this.pauseBtn.Location = new System.Drawing.Point(27, 67);
-            this.pauseBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pauseBtn.Margin = new System.Windows.Forms.Padding(2);
             this.pauseBtn.Name = "pauseBtn";
             this.pauseBtn.Size = new System.Drawing.Size(118, 32);
             this.pauseBtn.TabIndex = 1;
@@ -80,7 +81,7 @@
             // splitContainer1
             // 
             this.splitContainer1.Location = new System.Drawing.Point(27, 111);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -106,7 +107,7 @@
             this.sourceList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sourceList.HideSelection = false;
             this.sourceList.Location = new System.Drawing.Point(0, 0);
-            this.sourceList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.sourceList.Margin = new System.Windows.Forms.Padding(2);
             this.sourceList.MultiSelect = false;
             this.sourceList.Name = "sourceList";
             this.sourceList.Size = new System.Drawing.Size(180, 232);
@@ -128,7 +129,7 @@
             // waveBtn
             // 
             this.waveBtn.Location = new System.Drawing.Point(13, 106);
-            this.waveBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.waveBtn.Margin = new System.Windows.Forms.Padding(2);
             this.waveBtn.Name = "waveBtn";
             this.waveBtn.Size = new System.Drawing.Size(101, 19);
             this.waveBtn.TabIndex = 5;
@@ -139,7 +140,7 @@
             // stopBtn
             // 
             this.stopBtn.Location = new System.Drawing.Point(12, 130);
-            this.stopBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.stopBtn.Margin = new System.Windows.Forms.Padding(2);
             this.stopBtn.Name = "stopBtn";
             this.stopBtn.Size = new System.Drawing.Size(102, 22);
             this.stopBtn.TabIndex = 2;
@@ -150,7 +151,7 @@
             // refBtn
             // 
             this.refBtn.Location = new System.Drawing.Point(13, 11);
-            this.refBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.refBtn.Margin = new System.Windows.Forms.Padding(2);
             this.refBtn.Name = "refBtn";
             this.refBtn.Size = new System.Drawing.Size(102, 20);
             this.refBtn.TabIndex = 0;
@@ -158,16 +159,27 @@
             this.refBtn.UseVisualStyleBackColor = true;
             this.refBtn.Click += new System.EventHandler(this.refBtn_Click);
             // 
+            // buttonReadWavHeader
+            // 
+            this.buttonReadWavHeader.Location = new System.Drawing.Point(437, 75);
+            this.buttonReadWavHeader.Name = "buttonReadWavHeader";
+            this.buttonReadWavHeader.Size = new System.Drawing.Size(87, 36);
+            this.buttonReadWavHeader.TabIndex = 4;
+            this.buttonReadWavHeader.Text = "Read WAV file header";
+            this.buttonReadWavHeader.UseVisualStyleBackColor = true;
+            this.buttonReadWavHeader.Click += new System.EventHandler(this.buttonReadWavHeader_Click);
+            // 
             // AudioApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 366);
+            this.Controls.Add(this.buttonReadWavHeader);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.buttonWMP);
             this.Controls.Add(this.pauseBtn);
             this.Controls.Add(this.openBtn);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AudioApp";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AudioApp_FormClosing);
@@ -191,6 +203,7 @@
         private System.Windows.Forms.Button stopBtn;
         private System.Windows.Forms.Button refBtn;
         private System.Windows.Forms.Button waveBtn;
+        private System.Windows.Forms.Button buttonReadWavHeader;
     }
 }
 

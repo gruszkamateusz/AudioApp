@@ -2,8 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-
-
+using System.IO;
 
 namespace AudioApp
 {
@@ -17,6 +16,23 @@ namespace AudioApp
         private NAudio.Wave.DirectSoundOut output = null;
         private WMPLib.WindowsMediaPlayer Player;
 
+        //definicja składowych nagłówka pliku typu WAV
+        private int chunkSize, subchunk1Size, sampleRate, byteRate, subchunk2Size;
+        private short audioFormat, numChannels, blockAlign, bitsPerSample;
+        byte[] chunkID, format, subchunk1ID, subchunk2ID;
+
+        //Metoda konwertująca z typu byte[] na stringa
+        static string BytesToString(byte[] bytes)
+        {
+            using (MemoryStream stream = new MemoryStream(bytes))
+            {
+                using (StreamReader streamReader = new StreamReader(stream))
+                {
+                    return streamReader.ReadToEnd();
+                }
+            }
+        }
+
 
         //otwieranie pliku wav
         private void openBtn_Click(object sender, EventArgs e)
@@ -25,7 +41,7 @@ namespace AudioApp
             open.Filter = " Wave File (*.wav)|*.wav;";
             if (open.ShowDialog() != DialogResult.OK) return;
 
-            DisposeWave(); 
+            DisposeWave();
 
             wave = new NAudio.Wave.WaveFileReader(open.FileName);
             output = new NAudio.Wave.DirectSoundOut();
@@ -34,14 +50,14 @@ namespace AudioApp
 
             pauseBtn.Enabled = true;
         }
-        
+
         private void pauseBtn_Click(object sender, EventArgs e)
         {
-            if(output != null)
+            if (output != null)
             {
                 if (output.PlaybackState == NAudio.Wave.PlaybackState.Playing) output.Pause();
                 else if (output.PlaybackState == NAudio.Wave.PlaybackState.Paused) output.Play();
-                
+
             }
         }
 
@@ -53,7 +69,7 @@ namespace AudioApp
                 output.Dispose();
                 output = null;
             }
-                if (wave != null)
+            if (wave != null)
             {
                 wave.Dispose();
                 wave = null;
@@ -119,17 +135,17 @@ namespace AudioApp
         {
 
         }
-        
+
         private void refBtn_Click(object sender, EventArgs e)
         {
             // tworzymy liste mozliwych zrodel dzwieku,
             List<NAudio.Wave.WaveInCapabilities> sources = new List<NAudio.Wave.WaveInCapabilities>();
-            for(int i=0; i < NAudio.Wave.WaveIn.DeviceCount; i++)
+            for (int i = 0; i < NAudio.Wave.WaveIn.DeviceCount; i++)
             {
                 sources.Add(NAudio.Wave.WaveIn.GetCapabilities(i)); // dodajemy zrodla do listy sources
             }
             sourceList.Items.Clear(); // upewniamy sie ze lista sourceList w oknie jest pusta
-            foreach(var source in sources)
+            foreach (var source in sources)
             {
                 ListViewItem item = new ListViewItem(source.ProductName);   // tworzymy obiekt listy w oknie
                 item.SubItems.Add(new ListViewItem.ListViewSubItem(item, source.Channels.ToString()));
@@ -160,7 +176,7 @@ namespace AudioApp
             SaveFileDialog save = new SaveFileDialog();
             save.Filter = "Wave File (*.wav)|*.wav;";
             // jesli cos sie nie zgadza sie w oknie dialogowym - return
-            if (save.ShowDialog() != System.Windows.Forms.DialogResult.OK) return; 
+            if (save.ShowDialog() != System.Windows.Forms.DialogResult.OK) return;
 
             int deviceNumber = sourceList.SelectedItems[0].Index;
             sourceStream = new NAudio.Wave.WaveIn(); // przechowuje to co wchodzi 
@@ -195,6 +211,48 @@ namespace AudioApp
                 waveWriter.Dispose();
                 waveWriter = null;
             }
+        }
+
+        //Przycisk zczytujący nagłówek pliku typu WAV
+        private void buttonReadWavHeader_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            open.Filter = " Wave File (*.wav)|*.wav;";
+            open.ShowDialog();
+
+            //Zczytywanie poszczególnych składowych nagłówka
+            using (BinaryReader reader = new BinaryReader(File.Open(open.FileName, FileMode.Open)))
+            {
+                chunkID = reader.ReadBytes(4);
+                chunkSize = reader.ReadInt32();
+                format = reader.ReadBytes(4);
+                subchunk1ID = reader.ReadBytes(4);
+                subchunk1Size = reader.ReadInt32();
+                audioFormat = reader.ReadInt16();
+                numChannels = reader.ReadInt16();
+                sampleRate = reader.ReadInt32();
+                byteRate = reader.ReadInt32();
+                blockAlign = reader.ReadInt16();
+                bitsPerSample = reader.ReadInt16();
+                subchunk2ID = reader.ReadBytes(4);
+                subchunk2Size = reader.ReadInt32();
+            }
+
+            //Wypisanie w konsoli wartości składowych nagłówka
+            Console.WriteLine(BytesToString(chunkID));
+            Console.WriteLine(chunkSize);
+            Console.WriteLine(BytesToString(format));
+            Console.WriteLine(BytesToString(subchunk1ID));
+            Console.WriteLine(subchunk1Size);
+            Console.WriteLine(audioFormat);
+            Console.WriteLine(numChannels);
+            Console.WriteLine(sampleRate);
+            Console.WriteLine(byteRate);
+            Console.WriteLine(blockAlign);
+            Console.WriteLine(bitsPerSample);
+            Console.WriteLine(BytesToString(subchunk2ID));
+            Console.WriteLine(subchunk2Size);
+
         }
     }
 }
