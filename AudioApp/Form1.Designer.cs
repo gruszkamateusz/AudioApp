@@ -31,6 +31,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.pauseBtn = new System.Windows.Forms.Button();
             this.buttonWMP = new System.Windows.Forms.Button();
+            this.buttonReadHeader = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -58,7 +59,7 @@
             // 
             // buttonWMP
             // 
-            this.buttonWMP.Location = new System.Drawing.Point(59, 204);
+            this.buttonWMP.Location = new System.Drawing.Point(27, 135);
             this.buttonWMP.Name = "buttonWMP";
             this.buttonWMP.Size = new System.Drawing.Size(141, 46);
             this.buttonWMP.TabIndex = 2;
@@ -66,11 +67,22 @@
             this.buttonWMP.UseVisualStyleBackColor = true;
             this.buttonWMP.Click += new System.EventHandler(this.buttonWMP_Click);
             // 
+            // buttonReadHeader
+            // 
+            this.buttonReadHeader.Location = new System.Drawing.Point(179, 145);
+            this.buttonReadHeader.Name = "buttonReadHeader";
+            this.buttonReadHeader.Size = new System.Drawing.Size(132, 36);
+            this.buttonReadHeader.TabIndex = 3;
+            this.buttonReadHeader.Text = "Zczytaj nagłówek WAV";
+            this.buttonReadHeader.UseVisualStyleBackColor = true;
+            this.buttonReadHeader.Click += new System.EventHandler(this.buttonReadHeader_Click);
+            // 
             // AudioApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 366);
+            this.Controls.Add(this.buttonReadHeader);
             this.Controls.Add(this.buttonWMP);
             this.Controls.Add(this.pauseBtn);
             this.Controls.Add(this.button1);
@@ -87,6 +99,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button pauseBtn;
         private System.Windows.Forms.Button buttonWMP;
+        private System.Windows.Forms.Button buttonReadHeader;
     }
 }
 
