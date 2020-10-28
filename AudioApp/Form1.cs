@@ -141,27 +141,8 @@ namespace AudioApp
         private NAudio.Wave.DirectSoundOut waveOut = null; // wyjscie
         private NAudio.Wave.WaveFileWriter waveWriter = null; // zapisywanie pliku
 
-        // wywolanie dispose oraz zatrzymanie i ustawienie na null wszystkiego co uzywamy
-        private void stopBtn_Click(object sender, EventArgs e)
-        {
-            if( waveOut != null)
-            {
-                waveOut.Stop();
-                waveOut.Dispose();
-                waveOut = null;
-            }
-            if (sourceStream != null)
-            {
-                sourceStream.StopRecording();
-                sourceStream.Dispose();
-                sourceStream = null;
-            }
-            if(waveWriter != null)
-            {
-                waveWriter.Dispose();
-                waveWriter = null;
-            }
-        }
+
+
         // WaveInEventArgs - jesli zmienia się pobierany dzwiek to
         private void sourceStream_DataAvailable(object sender, NAudio.Wave.WaveInEventArgs e)
         {
@@ -192,6 +173,28 @@ namespace AudioApp
             waveWriter = new NAudio.Wave.WaveFileWriter(save.FileName, sourceStream.WaveFormat);
 
             sourceStream.StartRecording();
+        }
+
+        // wywolanie dispose oraz zatrzymanie i ustawienie na null wszystkiego co uzywamy
+        private void stopBtn_Click_1(object sender, EventArgs e)
+        {
+            if (waveOut != null)
+            {
+                waveOut.Stop();
+                waveOut.Dispose();
+                waveOut = null;
+            }
+            if (sourceStream != null)
+            {
+                sourceStream.StopRecording();
+                sourceStream.Dispose();
+                sourceStream = null;
+            }
+            if (waveWriter != null)
+            {
+                waveWriter.Dispose();
+                waveWriter = null;
+            }
         }
     }
 }
