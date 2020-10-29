@@ -43,12 +43,14 @@ namespace AudioApp
 
             DisposeWave();
 
-            wave = new NAudio.Wave.WaveFileReader(open.FileName);
+
+            NAudio.Wave.WaveChannel32 wave = new NAudio.Wave.WaveChannel32(new NAudio.Wave.WaveFileReader(open.FileName));
             output = new NAudio.Wave.DirectSoundOut();
-            output.Init(new NAudio.Wave.WaveChannel32(wave));
+            output.Init(wave);
             output.Play();
 
             pauseBtn.Enabled = true;
+
         }
 
         private void pauseBtn_Click(object sender, EventArgs e)
@@ -121,6 +123,31 @@ namespace AudioApp
         {
             MessageBox.Show("Cannot play media file.");
             this.Close();
+        }
+
+        private void buttonDrawChart_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            open.Filter = " Wave File (*.wav)|*.wav;";
+            if (open.ShowDialog() != DialogResult.OK) return;
+            WaveChannel32 wave = new WaveChannel32(new WaveFileReader(open.FileName));
+            int sampleSize = 1024;
+            var bufferSize = 16384 * sampleSize;
+            var buffer = new byte[bufferSize];
+            int read = 0;
+            chart1.Series.Add("wave");
+            chart1.Series["wave"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            chart1.Series["wave"].ChartArea = "ChartArea1";
+            while (wave.Position < wave.Length)
+            {
+                read = wave.Read(buffer, 0, bufferSize);
+                for (int i = 0; i < read / sampleSize; i++)
+                {
+                    var point = BitConverter.ToSingle(buffer, i * sampleSize);
+
+                    chart1.Series["wave"].Points.Add(point);
+                }
+            }
         }
 
         private void buttonWMP_Click(object sender, EventArgs e)

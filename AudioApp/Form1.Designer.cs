@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.openBtn = new System.Windows.Forms.Button();
             this.pauseBtn = new System.Windows.Forms.Button();
             this.buttonWMP = new System.Windows.Forms.Button();
@@ -39,15 +42,18 @@
             this.stopBtn = new System.Windows.Forms.Button();
             this.refBtn = new System.Windows.Forms.Button();
             this.buttonReadWavHeader = new System.Windows.Forms.Button();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.buttonDrawChart = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // openBtn
             // 
-            this.openBtn.Location = new System.Drawing.Point(27, 10);
+            this.openBtn.Location = new System.Drawing.Point(824, 11);
             this.openBtn.Margin = new System.Windows.Forms.Padding(2);
             this.openBtn.Name = "openBtn";
             this.openBtn.Size = new System.Drawing.Size(118, 36);
@@ -59,7 +65,7 @@
             // pauseBtn
             // 
             this.pauseBtn.Enabled = false;
-            this.pauseBtn.Location = new System.Drawing.Point(27, 67);
+            this.pauseBtn.Location = new System.Drawing.Point(824, 51);
             this.pauseBtn.Margin = new System.Windows.Forms.Padding(2);
             this.pauseBtn.Name = "pauseBtn";
             this.pauseBtn.Size = new System.Drawing.Size(118, 32);
@@ -70,9 +76,9 @@
             // 
             // buttonWMP
             // 
-            this.buttonWMP.Location = new System.Drawing.Point(169, 11);
+            this.buttonWMP.Location = new System.Drawing.Point(824, 88);
             this.buttonWMP.Name = "buttonWMP";
-            this.buttonWMP.Size = new System.Drawing.Size(136, 35);
+            this.buttonWMP.Size = new System.Drawing.Size(118, 41);
             this.buttonWMP.TabIndex = 2;
             this.buttonWMP.Text = "Windows Media Player";
             this.buttonWMP.UseVisualStyleBackColor = true;
@@ -80,7 +86,7 @@
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Location = new System.Drawing.Point(27, 111);
+            this.splitContainer1.Location = new System.Drawing.Point(519, 9);
             this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -93,8 +99,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.waveBtn);
             this.splitContainer1.Panel2.Controls.Add(this.stopBtn);
             this.splitContainer1.Panel2.Controls.Add(this.refBtn);
-            this.splitContainer1.Size = new System.Drawing.Size(310, 232);
-            this.splitContainer1.SplitterDistance = 180;
+            this.splitContainer1.Size = new System.Drawing.Size(283, 165);
+            this.splitContainer1.SplitterDistance = 164;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 3;
             // 
@@ -110,7 +116,7 @@
             this.sourceList.Margin = new System.Windows.Forms.Padding(2);
             this.sourceList.MultiSelect = false;
             this.sourceList.Name = "sourceList";
-            this.sourceList.Size = new System.Drawing.Size(180, 232);
+            this.sourceList.Size = new System.Drawing.Size(164, 165);
             this.sourceList.TabIndex = 0;
             this.sourceList.UseCompatibleStateImageBehavior = false;
             this.sourceList.View = System.Windows.Forms.View.Details;
@@ -150,7 +156,7 @@
             // 
             // refBtn
             // 
-            this.refBtn.Location = new System.Drawing.Point(13, 11);
+            this.refBtn.Location = new System.Drawing.Point(12, 10);
             this.refBtn.Margin = new System.Windows.Forms.Padding(2);
             this.refBtn.Name = "refBtn";
             this.refBtn.Size = new System.Drawing.Size(102, 20);
@@ -161,19 +167,47 @@
             // 
             // buttonReadWavHeader
             // 
-            this.buttonReadWavHeader.Location = new System.Drawing.Point(437, 75);
+            this.buttonReadWavHeader.Location = new System.Drawing.Point(824, 135);
             this.buttonReadWavHeader.Name = "buttonReadWavHeader";
-            this.buttonReadWavHeader.Size = new System.Drawing.Size(87, 36);
+            this.buttonReadWavHeader.Size = new System.Drawing.Size(118, 39);
             this.buttonReadWavHeader.TabIndex = 4;
             this.buttonReadWavHeader.Text = "Read WAV file header";
             this.buttonReadWavHeader.UseVisualStyleBackColor = true;
             this.buttonReadWavHeader.Click += new System.EventHandler(this.buttonReadWavHeader_Click);
             // 
+            // chart1
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(53, 228);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(859, 278);
+            this.chart1.TabIndex = 5;
+            this.chart1.Text = "chart1";
+            // 
+            // buttonDrawChart
+            // 
+            this.buttonDrawChart.Location = new System.Drawing.Point(53, 179);
+            this.buttonDrawChart.Name = "buttonDrawChart";
+            this.buttonDrawChart.Size = new System.Drawing.Size(107, 43);
+            this.buttonDrawChart.TabIndex = 6;
+            this.buttonDrawChart.Text = "Moc sygnału";
+            this.buttonDrawChart.UseVisualStyleBackColor = true;
+            this.buttonDrawChart.Click += new System.EventHandler(this.buttonDrawChart_Click);
+            // 
             // AudioApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.ClientSize = new System.Drawing.Size(992, 548);
+            this.Controls.Add(this.buttonDrawChart);
+            this.Controls.Add(this.chart1);
             this.Controls.Add(this.buttonReadWavHeader);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.buttonWMP);
@@ -187,6 +221,7 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -204,6 +239,8 @@
         private System.Windows.Forms.Button refBtn;
         private System.Windows.Forms.Button waveBtn;
         private System.Windows.Forms.Button buttonReadWavHeader;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Button buttonDrawChart;
     }
 }
 
