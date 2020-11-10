@@ -185,7 +185,6 @@ namespace AudioApp
         private NAudio.Wave.WaveFileWriter waveWriter = null; // zapisywanie pliku
 
 
-
         // WaveInEventArgs - jesli zmienia się pobierany dzwiek to
         private void sourceStream_DataAvailable(object sender, NAudio.Wave.WaveInEventArgs e)
         {
